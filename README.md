@@ -14,7 +14,7 @@
 
 - ***Data.*** 한 명당 7장(마스크 착용x1, 미착용x1, 불완전 착용x5) ,총 *2*,700명의 이미지. 한 사람당 384x512
 
-  ![maskimg](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/maskimg.png?raw=true)
+  ![maskimg](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/maskimg.png?raw=true)
 
 
 
@@ -34,9 +34,9 @@
 
 K-Fold CV를 통해 학습된 VanillaEfficientNet 모델을 각 Fold별로 N개씩 저장, 추론 단계에서 각 Fold별 K개의 모델을 불러와 TTA(Test Time Augmentation)를 적용하여 모든 결과값을 앙상블했습니다. Fold 수를 5로, Fold별 불러올 모델 수를 2로, TTA를 2로 설정하여 총 20(5x2x2)개의 추론 결과를 산술평균한 Soft Voting 앙상블의 성능이 가장 높았습니다. (Private LB. F1 0.7604, Accuracy 81.0952%)
 
-![ensemble_1](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/ensemble_1.png?raw=true)
+![ensemble_1](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/ensemble_1.png?raw=true)
 
-![ensemble_2](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/ensemble_2.png?raw=true)
+![ensemble_2](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/ensemble_2.png?raw=true)
 
 #### II. Hyper Parameters
 
@@ -175,13 +175,13 @@ transforms.Compose(
 
 ### I. Split
 
-![data split](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/data%20split.png?raw=true)
+![data split](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/data%20split.png?raw=true)
 
 주어진 학습 데이터 중 90%를 학습용 데이터로, 나머지 10%를 검증용 데이터로 활용했습니다. 합리적 검증을 위해 데이터를 이미지 단위가 아닌 사람 단위로 분리했는데, 이는 이미지 단위로 데이터를 분리할 경우 특정 사람의 이미지가 학습용 데이터와 검증용 데이터 모두에 등장해 검증 결과를 신뢰할 수 없는 data leakage 문제가 발생할 수 있기 때문입니다. 또한, 주어진 학습 데이터의 분포가 public/private 데이터의 분포와 같다는 가정 하에, 학습용 데이터와 검증용 데이터의 분포가 같도록 층화추출법을 활용해 주어진 데이터를 분리하였고, 검증용 데이터에는 어떠한 가공도 취하지 않음으로써 검증 결과의 신뢰성을 확보했습니다.
 
 ### II. Oversampling
 
-![mixup](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/mixup.png?raw=true)
+![mixup](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/mixup.png?raw=true)
 
 주어진 데이터는 18가지 카테고리별 불균형이 존재합니다. 때문에 비교적 부족한 카테고리의 데이터를 오버샘플링한 데이터셋을 추가 구성, 주어진 데이터와 더불어 모델 실험에 활용했습니다.
 
@@ -209,30 +209,30 @@ TTA(Test Time Augmentation)에 활용하기 위한 Augmentation으로, Train 단
 
 ### I. VanillaEfficientNet
 
-![veffi](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/veffi.png?raw=true)
+![veffi](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/veffi.png?raw=true)
 
 Pretrained EfficientNet(`'efficientnet-b3'`)을 Backbone으로 하는 간단한 이미지 분류 모델입니다. ([소스코드 보기](https://github.com/iloveslowfood/ImageClassfication/blob/05f60efadc8865b5f76e9503881b5337e5d64313/model.py#L43))
 
 ### II. VanillaResNet
 
-![vres](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/vres.png?raw=true)
+![vres](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/vres.png?raw=true)
 
 Pretrained ResNet(`resnet50`)을 Backbone으로 하는 간단한 이미지 분류 모델입니다. ([소스코드 보기](https://github.com/iloveslowfood/ImageClassfication/blob/05f60efadc8865b5f76e9503881b5337e5d64313/model.py#L70))
 
 ### III. MultiClassTHANet
 
-![thanet](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/thanet.png?raw=true)
+![thanet](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/thanet.png?raw=true)
 
 Pretrained Image Network와 Attention 아키텍쳐를 활용한 이미지 분류 모델입니다. ([소스코드 보기](https://github.com/iloveslowfood/ImageClassfication/blob/7ef05acccfa04a386a6b98a4e471e8572ea75ff2/model.py#L96))
 
 ### IV. MultiLabelTHANet
 
-![thanet_ml](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/thanet_ml.png?raw=true)
+![thanet_ml](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/thanet_ml.png?raw=true)
 
 Pretrained Image Network와 Attention 아키텍쳐를 활용한 이미지 분류 모델입니다. ([소스코드 보기](https://github.com/iloveslowfood/ImageClassfication/blob/7ef05acccfa04a386a6b98a4e471e8572ea75ff2/model.py#L171))
 
 ### V. THANet
 
-![thanet_3](https://github.com/iloveslowfood/ImageClassfication/blob/main/etc/thanet_3.png?raw=true)
+![thanet_3](https://github.com/iloveslowfood/p1-img-iloveslowfood/blob/main/etc/thanet_3.png?raw=true)
 
 Pretrained Image Network를 활용한 Multi-label 이미지 분류 모델입니다. ([소스코드 보기](https://github.com/iloveslowfood/ImageClassfication/blob/7ef05acccfa04a386a6b98a4e471e8572ea75ff2/model.py#L240))
